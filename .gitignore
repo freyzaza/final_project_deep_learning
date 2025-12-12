@@ -1,0 +1,21 @@
+# ============================
+# IGNORE LARGE MODELS
+# ============================
+
+# Ignore IndoBERT fine-tuned model directory
+outputs/models/model_bert_cnn/
+
+# Ignore BERT tokenizer folder
+outputs/models/bert_tokenizer/
+
+# Ignore any BERT-based savedmodel
+**/saved_model.pb
+**/tf_model.h5
+
+# Ignore TensorFlow checkpoints (very large)
+**/checkpoints/
+**/assets/
+
+# Ignore PyTorch BERT models if accidentally saved
+*.bin
+*.pt
