@@ -33,23 +33,23 @@ This project focuses on building a robust **Indonesian email spam classifier** u
 ## 🧠 System Architecture
 
 **Pipeline Overview**
-
-Raw Text  
-↓  
-Case Folding → Filtering → Emoji Removal → Stopwords Removal → Stemming  
-↓  
-Tokenization  
-↓  
-Exploratory Data Analysis (EDA)  
-↓  
-Train-Test Split (80% / 20%)  
-↓  
-Feature Extraction  
-- TF-IDF → CNN  
-- IndoBERT → CNN  
-↓  
+```
+Raw Text
+  ↓
+Case Folding → Filtering → Emoji Removal → Stopwords Removal → Stemming
+  ↓
+Tokenization
+  ↓
+Exploratory Data Analysis (EDA)
+  ↓
+Train-Test Split (80% / 20%)
+  ↓
+Feature Extraction
+  ├── TF-IDF → CNN
+  └── IndoBERT → CNN
+  ↓
 Evaluation
-
+```
 
 
 ---
