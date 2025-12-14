@@ -71,93 +71,25 @@ deep-learning-final-project/
 └── LICENSE             # MIT License
 ```
 
-🚀 Getting Started
-🔹 Prerequisites
+## 🚀 Getting Started
+
+### 🔹 Prerequisites
 
 Make sure you have the following installed:
 
-Python 3.10.9
+- **Python 3.10.9**
+- **Anaconda / Miniconda**
+- **Visual Studio Code** (recommended)
 
-Anaconda / Miniconda
-
-Visual Studio Code (recommended)
-
-🔗 Download Anaconda:
+🔗 **Download Anaconda**  
 https://www.anaconda.com/products/distribution
 
-📁 Clone Repository
+---
+
+## 📦 Clone Repository
 
 Clone the repository from GitHub:
 
+```bash
 git clone https://github.com/USERNAME/REPOSITORY_NAME.git
 
-
-💡 Replace USERNAME/REPOSITORY_NAME with your actual GitHub repository.
-
-You may use any preferred method
-(recommended: GitHub Desktop
-).
-
-If Using GitHub Desktop:
-
-Click Code → Local → HTTPS → Open with GitHub Desktop
-
-Clone to an empty folder
-
-🧪 Environment Setup (Step-by-Step)
-✅ Step 1 — Create Conda Environment
-conda create -n DL_Project(bebas namanya) python=3.10.9
-
-
-If prompted, type:
-
-y
-
-
-Activate the environment:
-
-conda activate DL_Project
-
-✅ Step 2 — Install Dependencies (IMPORTANT ORDER)
-pip install -r requirements.txt
-
-✅ Step 3 — Register Kernel to VS Code
-
-Open terminal in Visual Studio Code (`Ctrl + ``):
-
-python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
-
-✅ Step 4 — Restart VS Code
-
-Close Visual Studio Code
-
-Reopen VS Code
-
-Select kernel: DL_Project
-
-✅ Step 5 — Environment Test (MANDATORY)
-
-Run the following test:
-
-import tensorflow as tf
-import typing_extensions
-
-print(tf.__version__)
-print("typing OK")
-
-
-Expected output:
-
-2.13.0
-typing OK
-
-
-✅ If successful → Environment setup COMPLETE
-
-🧠 Notes
-
-Always make sure the selected Python kernel is DL_Project
-
-If TensorFlow version mismatch occurs, reinstall dependencies inside the environment
-
-Restart VS Code if kernel does not appear
