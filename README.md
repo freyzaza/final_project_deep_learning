@@ -69,6 +69,7 @@ deep-learning-final-project/
 ├── README.md           # Main documentation
 ├── .gitignore          # Ignored files & folders
 └── LICENSE             # MIT License
+```
 
 🚀 Getting Started
 🔹 Prerequisites
