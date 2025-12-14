@@ -86,10 +86,4 @@ https://www.anaconda.com/products/distribution
 
 ---
 
-## 📦 Clone Repository
-
-Clone the repository from GitHub:
-
-```bash
-git clone https://github.com/USERNAME/REPOSITORY_NAME.git
 
