@@ -27,7 +27,7 @@ This project focuses on building an **Indonesian-language email spam classifier*
 
 ### Pipeline Overview
 
-```text
+```
 Raw Text
   ↓
 Case Folding → Filtering → Emoji Removal → Stopwords Removal → Stemming
@@ -43,11 +43,11 @@ Feature Extraction
   └── IndoBERT → CNN
   ↓
 Evaluation
+```
 
 ---
-## Project Structure
 
-```text
+## Project Structure
 deep-learning-final-project/
 ├── app/                # Streamlit demo application
 ├── data/               # Raw & processed datasets
