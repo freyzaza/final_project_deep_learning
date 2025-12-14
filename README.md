@@ -82,7 +82,7 @@ Clone the repository from GitHub:
 git clone https://github.com/freyzaza/final_project_deep_learning.git
 ```
 
-### 🔹 Prerequisites
+### 🔹 System Requirements
 
 Make sure you have the following installed:
 
