@@ -95,17 +95,56 @@ https://www.anaconda.com/products/distribution
 
 ---
 
-## 🧪 Environment Setup *(Step-by-Step)*
+## 🧪 Environment Setup (Step-by-Step)
 
-Ikuti langkah-langkah berikut untuk menyiapkan environment pengembangan project ini.
+Follow the steps below to set up the development environment for this project.
 
 ---
 
 ### ✅ Step 1 — Create Conda Environment
 
-Buat environment Conda baru dengan Python versi yang sesuai:
+Create a new Conda environment with the required Python version:
 
-```bash
+```
 conda create -n DL_Project python=3.10.9
+```
+
+### ✅ Step 2 — Install Dependencies (IMPORTANT ORDER)
+```
+pip install -r requirements.txt
+```
+
+### ✅ Step 3 — Register Kernel to VS Code
+
+Open terminal in VS Code (`Ctrl + ``):
+```
+python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
+```
+
+### ✅ Step 4 — Restart VS Code
+
+Close VS Code
+
+Reopen VS Code
+
+Select kernel: DL_Project
+
+### ✅ Step 5 — Environment Test (MANDATORY)
+```
+import tensorflow as tf
+import typing_extensions
+
+print(tf.__version__)
+print("typing OK")
+```
+
+Expected output:
+```
+2.13.0
+typing OK
+```
+
+✅ If successful → Environment setup COMPLETE
+
 
 
