@@ -183,6 +183,27 @@ http://localhost:8501 (example)
 - The VS Code terminal will display a local URL
 - Use **Ctrl + Click** on the link, or copy it into your browser
 ---
+## 📊 Evaluation
+
+Evaluation metrics include:
+
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1-score**
+
+### Model Comparison
+
+- **TF-IDF** — traditional NLP feature-based approach
+- **IndoBERT** — transformer-based contextual embeddings
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to **use**, **modify**, and **distribute** this project with proper attribution.
 
 
 
