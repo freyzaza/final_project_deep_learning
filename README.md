@@ -72,69 +72,16 @@ VS Code (recommended)
 🧪 Environment Setup (Step-by-Step)
 ✅ STEP 1 — Create Conda Environment
 conda create -n DL_Project python=3.10.9
-
-
 If prompted, type y to continue.
 
 Activate environment:
-
 conda activate DL_Project
 
 ✅ STEP 2 — Install Dependencies (IMPORTANT ORDER)
 pip install -r requirements.txt
 
-📄 requirements.txt
-# ================================
-# CORE DEEP LEARNING
-# ================================
-tensorflow==2.13.0
-keras==2.13.1
-
-# ================================
-# NLP / TRANSFORMERS
-# ================================
-transformers==4.33.3
-
-# ================================
-# DATA & ML & DL
-# ================================
-numpy==1.24.3
-pandas==2.0.3
-scikit-learn==1.3.0
-joblib==1.3.2
-gymnasium==0.28.1
-
-# ================================
-# VISUALIZATION
-# ================================
-matplotlib==3.7.2
-seaborn==0.13.2
-tqdm==4.66.1
-
-# ================================
-# TEXT PREPROCESSING
-# ================================
-Sastrawi==1.0.1
-emoji==2.10.1
-typing_extensions==4.5.0
-
-# ================================
-# STREAMLIT (FRONTEND)
-# ================================
-streamlit==1.30.0
-
-# ================================
-# JUPYTER / KERNEL (STABLE)
-# ================================
-ipykernel==6.29.5
-ipython==8.12.0
-jupyter-client==8.2.0
-traitlets==5.9.0
-
 ✅ STEP 3 — Register Kernel to VS Code
-
 Open terminal in VS Code (Ctrl + `):
-
 python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
 
 ✅ STEP 4 — Restart VS Code
@@ -151,24 +98,17 @@ import typing_extensions
 
 print(tf.__version__)
 print("typing OK")
-
-
 Expected output:
-
 2.13.0
 typing OK
-
 
 🔥 Environment setup SUCCESSFUL
 
 🏋️ Model Training
 
 Navigate to the training script:
-
 cd src
 python train.py
-
-
 This will:
 
 Train TF-IDF + CNN
@@ -176,21 +116,15 @@ Train TF-IDF + CNN
 Train IndoBERT + CNN
 
 Save trained models to:
-
 outputs/models/
 
 🖥️ Run the Streamlit Application
 
 After training is completed:
-
 cd app
 streamlit run app.py
-
-
 Open browser at:
-
 http://localhost:8501
-
 📊 Evaluation
 
 Evaluation includes:
