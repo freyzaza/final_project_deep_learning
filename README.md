@@ -75,7 +75,7 @@ deep-learning-final-project/
 ## 🚀 Getting Started
 
 ### 📦 Clone Repository
-```
+
 Clone the repository from GitHub:
 
 ```bash
