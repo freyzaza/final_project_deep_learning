@@ -3,6 +3,7 @@ project:
   version: "1.0"
   description: "Deep Learning Email Spam Detector using TF-IDF+CNN and IndoBERT+CNN"
 
+# The real parameters are used in the main backend code (src/).
 
 # =====================================================================
 # DATASET CONFIGURATION
