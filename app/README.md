@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 ### ✅ Step 3 — Register Kernel to VS Code
 
-Open terminal in VS Code (`Ctrl + ``):
+Open terminal in VS Code (Ctrl + `):
 ```
 python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
 ```
