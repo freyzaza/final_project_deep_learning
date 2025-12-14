@@ -105,7 +105,7 @@ Follow the steps below to set up the development environment for this project.
 Create a new Conda environment with the required Python version:
 
 ```
-conda create -n DL_Project python=3.10.9
+conda create -n environment name (example: DL_Project) python=3.10.9
 ```
 
 ### ✅ Step 2 — Install Dependencies (IMPORTANT ORDER)
@@ -122,11 +122,11 @@ python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
 
 ### ✅ Step 4 — Restart VS Code
 
-Close VS Code
+After registering the kernel, restart Visual Studio Code:
 
-Reopen VS Code
-
-Select kernel: DL_Project
+1. **Close VS Code**
+2. **Reopen VS Code**
+3. Select the kernel: **DL_Project**
 
 ### ✅ Step 5 — Environment Test (MANDATORY)
 ```
