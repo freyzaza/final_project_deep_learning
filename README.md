@@ -95,4 +95,17 @@ https://www.anaconda.com/products/distribution
 
 ---
 
+## 🧪 Environment Setup *(Step-by-Step)*
+
+Ikuti langkah-langkah berikut untuk menyiapkan environment pengembangan project ini.
+
+---
+
+### ✅ Step 1 — Create Conda Environment
+
+Buat environment Conda baru dengan Python versi yang sesuai:
+
+```bash
+conda create -n DL_Project python=3.10.9
+
 
