@@ -70,6 +70,7 @@ deep-learning-final-project/
 ├── .gitignore          # Ignored files & folders
 └── LICENSE             # MIT License
 ```
+---
 
 ## 🚀 Getting Started
 
