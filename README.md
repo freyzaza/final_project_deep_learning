@@ -212,6 +212,21 @@ Evaluation metrics include:
 
 ---
 
+## 🧪 Optional Experiment — Embedding + CNN
+
+In addition to the main **TF-IDF + CNN** pipeline, this project includes an **optional experiment**
+exploring the difference between **TF-IDF + CNN** and **embedding-based representations + CNN**.
+
+This experiment is **not part of the main system pipeline** and is intended only to provide
+additional insights into how embedding-based representations perform in comparison to
+classical TF-IDF features.
+
+### Notes
+
+- The CNN architecture remains consistent with the main model
+- The embedding-based experiment is **exploratory in nature**
+- Results from this experiment are **not used as the primary benchmark**
+
 ## 📄 License
 
 This project is licensed under the **MIT License**.
