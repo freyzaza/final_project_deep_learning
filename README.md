@@ -143,7 +143,23 @@ Expected output:
 typing OK
 ```
 
-✅ If successful → Environment setup COMPLETE
+✅ **If successful → Environment setup COMPLETE**
 
+---
+## 🏋️ Model Training
 
+Run the training process from the `src` directory:
 
+```
+python train.py
+```
+
+This process will:
+
+- Train **TF-IDF + Convolutional Neural Network (CNN)**
+- Train **IndoBERT + Convolutional Neural Network (CNN)**
+- Save trained models will go to:
+
+```
+outputs/models/
+```
