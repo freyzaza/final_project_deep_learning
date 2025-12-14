@@ -18,15 +18,26 @@ def ensure_dir(path):
 
 
 # ============================================================
+# Pilih colormap berdasarkan model
+# ============================================================
+def get_heatmap_color(model_name):
+    name = model_name.lower()
+    if "tf-idf" in name or "tfidf" in name:
+        return "Reds"
+    return "Blues"
+
+
+# ============================================================
 # Confusion Matrix Heatmap
 # ============================================================
-def plot_confusion_heatmap(y_true, y_pred, labels, title, save_path=None):
+def plot_confusion_heatmap(y_true, y_pred, labels, title, model_name, save_path=None):
     cm = confusion_matrix(y_true, y_pred)
+    cmap = get_heatmap_color(model_name)
 
     plt.figure(figsize=(7, 6))
     sns.heatmap(
         cm, annot=True, fmt="d",
-        cmap="Blues",
+        cmap=cmap,
         xticklabels=labels,
         yticklabels=labels
     )
@@ -93,9 +104,12 @@ def evaluate_model(model_name, y_true, y_pred, labels):
 
     # Heatmap
     heatmap_path = os.path.join(LOG_DIR, f"{model_name}_heatmap.png")
-    plot_confusion_heatmap(y_true, y_pred, labels,
-                           title=f"Confusion Matrix - {model_name}",
-                           save_path=heatmap_path)
+    plot_confusion_heatmap(
+        y_true, y_pred, labels,
+        title=f"Confusion Matrix - {model_name}",
+        model_name=model_name,
+        save_path=heatmap_path
+    )
     print(f"[SAVED] Heatmap → {heatmap_path}")
 
     return acc, df_report
