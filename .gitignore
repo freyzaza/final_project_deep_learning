@@ -1,21 +1,24 @@
-# ============================
-# IGNORE LARGE MODELS
-# ============================
+# Ignore environments
+.venv/
+env/
+venv/
+*.pyc
+__pycache__/
 
-# Ignore IndoBERT fine-tuned model directory
+# Ignore model folders
+outputs/models/bert_tokenizer/
 outputs/models/model_bert_cnn/
 
-# Ignore BERT tokenizer folder
-outputs/models/bert_tokenizer/
+# Ignore large files
+*.h5
+*.pkl
+*.csv
 
-# Ignore any BERT-based savedmodel
-**/saved_model.pb
-**/tf_model.h5
+# Except: keep tfidf vectorizer & small models
+!outputs/models/model_tfidf_cnn.h5
+!outputs/models/tfidf_vectorizer.pkl
+!outputs/models/tokenizer.pkl
+!outputs/models/label_encoder.pkl
 
-# Ignore TensorFlow checkpoints (very large)
-**/checkpoints/
-**/assets/
-
-# Ignore PyTorch BERT models if accidentally saved
-*.bin
-*.pt
+# Ignore notebook checkpoints
+.ipynb_checkpoints/

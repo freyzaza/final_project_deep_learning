@@ -1,7 +1,7 @@
 import streamlit as st
 from model_loader import (
     load_tfidf_model, predict_tfidf,
-    # load_bert_model, predict_bert    # <-- IndoBERT sementara dimatikan
+    load_bert_model, predict_bert    
 )
 
 st.set_page_config(page_title="Email Spam Detection", layout="centered")
@@ -18,7 +18,7 @@ model_choice = st.selectbox(
     "Pilih Model Klasifikasi:",
     [
         "TF-IDF + CNN",
-        # "IndoBERT + CNN"   # <-- di-comment biar tidak bisa dipilih
+        "IndoBERT + CNN"   
     ]
 )
 
@@ -30,8 +30,8 @@ try:
     if model_choice == "TF-IDF + CNN":
         vectorizer, tfidf_model, label_encoder = load_tfidf_model()
 
-    # elif model_choice == "IndoBERT + CNN":
-    #     tokenizer, bert_model, label_encoder = load_bert_model()
+    elif model_choice == "IndoBERT + CNN":
+        tokenizer, bert_model, label_encoder = load_bert_model()
 
 except Exception as e:
     st.error(f"Gagal memuat model: {e}")
@@ -55,10 +55,10 @@ if st.button("Prediksi"):
                 label = predict_tfidf(email_text, vectorizer, tfidf_model, label_encoder)
 
             # =========================================
-            # IndoBERT (sementara di-comment)
+            # IndoBERT 
             # =========================================
-            # elif model_choice == "IndoBERT + CNN":
-            #     label = predict_bert(email_text, tokenizer, bert_model, label_encoder)
+            elif model_choice == "IndoBERT + CNN":
+                label = predict_bert(email_text, tokenizer, bert_model, label_encoder)
 
             # =========================================
             # HASIL OUTPUT

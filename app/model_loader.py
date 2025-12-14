@@ -4,45 +4,54 @@ import emoji
 import joblib
 import numpy as np
 import tensorflow as tf
-from transformers import BertTokenizer
+
+from transformers import BertTokenizer, TFBertModel
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
 
 # ======================================================================
-# BASE DIRECTORY
+# BASE DIRECTORY — gunakan output folder di luar src/
 # ======================================================================
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "outputs", "models")
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))          # /src
+BASE_DIR = os.path.dirname(SRC_DIR)                           # project root
+MODEL_DIR = os.path.join(BASE_DIR, "outputs", "models")       # /outputs/models
 
-# === TF-IDF paths ===
+
+# ======================================================================
+# PATHS
+# ======================================================================
 VECTORIZER_PATH = os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl")
 TFIDF_MODEL_PATH = os.path.join(MODEL_DIR, "model_tfidf_cnn.h5")
 LABEL_ENCODER_PATH = os.path.join(MODEL_DIR, "label_encoder.pkl")
 
-# === BERT paths ===
 BERT_TOKENIZER_DIR = os.path.join(MODEL_DIR, "bert_tokenizer")
-BERT_MODEL_DIR = os.path.join(MODEL_DIR, "model_bert_cnn")   # <-- FOLDER, NOT FILE
+BERT_MODEL_DIR = os.path.join(MODEL_DIR, "model_bert_cnn")
 
 
 # ======================================================================
-# TF-IDF LOADING
+# LOAD TF-IDF (TOKENIZER + CNN) MODEL
 # ======================================================================
 def load_tfidf_model():
-    tokenizer = joblib.load(os.path.join(MODEL_DIR, "tokenizer.pkl"))
-    model = tf.keras.models.load_model(os.path.join(MODEL_DIR, "model_tfidf_cnn.h5"))
+    vectorizer = joblib.load(VECTORIZER_PATH)
+    model = tf.keras.models.load_model(TFIDF_MODEL_PATH)
     label_encoder = joblib.load(LABEL_ENCODER_PATH)
-    return tokenizer, model, label_encoder
-
-
+    return vectorizer, model, label_encoder
 
 # ======================================================================
-# BERT LOADING
+# LOAD BERT MODEL
 # ======================================================================
 def load_bert_model():
     tokenizer = BertTokenizer.from_pretrained(BERT_TOKENIZER_DIR)
-    bert_model = tf.keras.models.load_model(BERT_MODEL_DIR, compile=False)
-    label_encoder = joblib.load(LABEL_ENCODER_PATH)
-    return tokenizer, bert_model, label_encoder
 
+    model = tf.keras.models.load_model(
+        BERT_MODEL_DIR,
+        compile=False,
+        custom_objects={"TFBertModel": TFBertModel}
+    )
+
+    label_encoder = joblib.load(LABEL_ENCODER_PATH)
+    return tokenizer, model, label_encoder
 
 
 # ======================================================================
@@ -76,24 +85,26 @@ def clean_text(text):
     return " ".join(tokens)
 
 
-# ======================================================================
-# TF-IDF PREDICT
-# ======================================================================
-def predict_tfidf(text, tokenizer, model, label_encoder):
-    clean = clean_text(text)
-    seq = tokenizer.texts_to_sequences([clean])
-    seq = pad_sequences(seq, maxlen=300)
 
-    pred = model.predict(seq).argmax(axis=1)[0]
+# ======================================================================
+# TF-IDF (TOKENIZER SEQUENCE CNN) PREDICT
+# ======================================================================
+def predict_tfidf(text, vectorizer, model, label_encoder):
+    clean = clean_text(text)
+    tfidf = vectorizer.transform([clean]).toarray()
+    tfidf = np.expand_dims(tfidf, axis=2)
+    pred = model.predict(tfidf).argmax(axis=1)[0]
     return label_encoder.inverse_transform([pred])[0]
+
+
 
 
 # ======================================================================
 # BERT PREDICT
 # ======================================================================
-MAX_LEN = 128
-
 def predict_bert(text, tokenizer, model, label_encoder):
+    print("DEBUG predict_bert input:", type(text), text)
+
     clean = clean_text(text)
 
     enc = tokenizer(
@@ -104,10 +115,12 @@ def predict_bert(text, tokenizer, model, label_encoder):
         return_tensors="tf"
     )
 
-    pred = model.predict([
-        enc["input_ids"],
-        enc["attention_mask"]
-    ]).argmax(axis=1)[0]
 
+    pred = model.predict({
+        "input_ids": enc["input_ids"],
+        "attention_mask": enc["attention_mask"]
+    })
+
+    pred = pred.argmax(axis=1)[0]
     return label_encoder.inverse_transform([pred])[0]
 

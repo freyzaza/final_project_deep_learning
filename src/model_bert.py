@@ -4,16 +4,14 @@ from transformers import BertTokenizer, TFBertModel
 
 MAX_LEN = 128
 
-# Load backbone once
-bert_backbone = TFBertModel.from_pretrained("indobenchmark/indobert-base-p1")
-tokenizer = BertTokenizer.from_pretrained("indobenchmark/indobert-base-p1")
-
-
 # ============================================================
-# BERT ENCODING (dipakai di training)
+# TOKENIZER (AMAN disimpan global)
 # ============================================================
+tokenizer = BertTokenizer.from_pretrained(
+    "indobenchmark/indobert-base-p1"
+)
+
 def encode_bert(texts):
-    """Encode list/Series of texts menjadi input BERT."""
     return tokenizer(
         list(texts),
         truncation=True,
@@ -22,39 +20,46 @@ def encode_bert(texts):
         return_tensors="tf"
     )
 
-
 # ============================================================
-# BERT + CNN MODEL
+# BERT + CNN MODEL (FIXED)
 # ============================================================
 def build_bert_cnn(num_classes):
-    # input tensors
-    input_ids = layers.Input(shape=(MAX_LEN,), dtype=tf.int32, name="input_ids")
-    attention_mask = layers.Input(shape=(MAX_LEN,), dtype=tf.int32, name="attention_mask")
+    # 🔥 CREATE BACKBONE DI DALAM FUNCTION
+    bert = TFBertModel.from_pretrained(
+        "indobenchmark/indobert-base-p1"
+    )
 
-    # backbone BERT
-    bert_output = bert_backbone(
+    input_ids = layers.Input(
+        shape=(MAX_LEN,),
+        dtype=tf.int32,
+        name="input_ids"
+    )
+    attention_mask = layers.Input(
+        shape=(MAX_LEN,),
+        dtype=tf.int32,
+        name="attention_mask"
+    )
+
+    bert_output = bert(
         input_ids=input_ids,
-        attention_mask=attention_mask
-    )[0]  # shape: (batch, MAX_LEN, 768)
+        attention_mask=attention_mask,
+        training=False
+    )[0]
 
-    # CNN Head
-    x = layers.Conv1D(128, 3, activation='relu')(bert_output)
+    x = layers.Conv1D(128, 3, activation="relu")(bert_output)
     x = layers.GlobalMaxPooling1D()(x)
-    x = layers.Dense(128, activation='relu')(x)
-    output = layers.Dense(num_classes, activation='softmax')(x)
+    x = layers.Dense(128, activation="relu")(x)
+    output = layers.Dense(num_classes, activation="softmax")(x)
 
-    model = tf.keras.Model(inputs=[input_ids, attention_mask], outputs=output)
+    model = tf.keras.Model(
+        inputs=[input_ids, attention_mask],
+        outputs=output
+    )
 
     model.compile(
         optimizer=tf.keras.optimizers.Adam(1e-5),
         loss="sparse_categorical_crossentropy",
         metrics=["accuracy"]
     )
+
     return model
-
-
-# ============================================================
-# EXPORT tokenizer (dipakai Streamlit)
-# ============================================================
-def get_tokenizer():
-    return tokenizer

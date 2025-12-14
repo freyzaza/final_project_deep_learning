@@ -4,11 +4,22 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import pandas as pd
 
+# ============================================================
+# BASE DIRECTORY (parent folder dari src/)
+# ============================================================
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOG_DIR = os.path.join(BASE_DIR, "outputs", "logs")
+PLOT_DIR = os.path.join(BASE_DIR, "outputs", "plots")
+
 def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
 
+# ============================================================
+# Confusion Matrix Heatmap
+# ============================================================
 def plot_confusion_heatmap(y_true, y_pred, labels, title, save_path=None):
     cm = confusion_matrix(y_true, y_pred)
 
@@ -28,10 +39,14 @@ def plot_confusion_heatmap(y_true, y_pred, labels, title, save_path=None):
 
     plt.close()
 
-def plot_training_curves(history, model_name, save_dir):
-    ensure_dir(save_dir)
 
-    # Accuracy curve
+# ============================================================
+# Training Curves → disimpan ke outputs/plots/
+# ============================================================
+def plot_training_curves(history, model_name):
+    ensure_dir(PLOT_DIR)
+
+    # Accuracy
     plt.figure(figsize=(7, 5))
     plt.plot(history.history["accuracy"], label="Train Accuracy")
     plt.plot(history.history["val_accuracy"], label="Val Accuracy")
@@ -40,10 +55,11 @@ def plot_training_curves(history, model_name, save_dir):
     plt.ylabel("Accuracy")
     plt.legend()
     plt.grid(True)
-    plt.savefig(f"{save_dir}/{model_name}_accuracy.png", dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PLOT_DIR, f"{model_name}_accuracy.png"),
+                dpi=300, bbox_inches="tight")
     plt.close()
 
-    # Loss curve
+    # Loss
     plt.figure(figsize=(7, 5))
     plt.plot(history.history["loss"], label="Train Loss")
     plt.plot(history.history["val_loss"], label="Val Loss")
@@ -52,53 +68,51 @@ def plot_training_curves(history, model_name, save_dir):
     plt.ylabel("Loss")
     plt.legend()
     plt.grid(True)
-    plt.savefig(f"{save_dir}/{model_name}_loss.png", dpi=300, bbox_inches="tight")
+    plt.savefig(os.path.join(PLOT_DIR, f"{model_name}_loss.png"),
+                dpi=300, bbox_inches="tight")
     plt.close()
 
-def evaluate_model(model_name, y_true, y_pred, labels, log_dir="outputs/logs/"):
-    ensure_dir(log_dir)
 
-    # -------- Accuracy --------
+# ============================================================
+# Evaluate model → logs (report + heatmap)
+# ============================================================
+def evaluate_model(model_name, y_true, y_pred, labels):
+    ensure_dir(LOG_DIR)
+
+    # Accuracy
     acc = accuracy_score(y_true, y_pred)
     print(f"\n=== {model_name} ACCURACY: {acc:.4f} ===\n")
 
-    # -------- Classification Report --------
+    # Classification report
     report = classification_report(y_true, y_pred, output_dict=True)
     df_report = pd.DataFrame(report).transpose()
-    print(df_report)
 
-    # Save classification report
-    report_path = f"{log_dir}/{model_name}_classification_report.csv"
+    report_path = os.path.join(LOG_DIR, f"{model_name}_classification_report.csv")
     df_report.to_csv(report_path)
     print(f"[SAVED] Classification Report → {report_path}")
 
-    # -------- Heatmap --------
-    heatmap_path = f"{log_dir}/{model_name}_heatmap.png"
-    plot_confusion_heatmap(
-        y_true, y_pred, labels,
-        title=f"Confusion Matrix - {model_name}",
-        save_path=heatmap_path
-    )
+    # Heatmap
+    heatmap_path = os.path.join(LOG_DIR, f"{model_name}_heatmap.png")
+    plot_confusion_heatmap(y_true, y_pred, labels,
+                           title=f"Confusion Matrix - {model_name}",
+                           save_path=heatmap_path)
     print(f"[SAVED] Heatmap → {heatmap_path}")
 
     return acc, df_report
 
 
+# ============================================================
+# Combined evaluation function
+# ============================================================
 def full_evaluation(model_name, history, y_true, y_pred, labels):
-    """
-    Evaluates:
-    - Training curves
-    - Classification report
-    - Confusion matrix heatmap
-    """
-    log_dir = "outputs/logs/"
-    ensure_dir(log_dir)
+    ensure_dir(LOG_DIR)
+    ensure_dir(PLOT_DIR)
 
-    # Training curves
-    plot_training_curves(history, model_name, log_dir)
+    # Save training curves
+    plot_training_curves(history, model_name)
 
-    # Accuracy + report + heatmap
-    acc, report = evaluate_model(model_name, y_true, y_pred, labels, log_dir)
+    # Save logs (classification report + heatmap)
+    acc, report = evaluate_model(model_name, y_true, y_pred, labels)
 
     print(f"\n==== Evaluation for {model_name} DONE ====\n")
     return acc, report
