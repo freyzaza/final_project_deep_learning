@@ -1,38 +1,38 @@
-📧 Indonesian Email Spam Classification using CNN
-📌 Project Overview
+# 📧 Indonesian Email Spam Classification using CNN
 
-Email spam is one of the most widespread digital threats today.
-Spam messages often contain phishing links, scam offers, malware, and misleading promotions, which can cause financial loss and security breaches.
+## 📌 Project Overview
 
-This project focuses on building an Indonesian-language email spam classifier and comparing two different deep learning approaches.
+Email spam is one of the most widespread digital threats today.  
+Spam messages often contain **phishing links, scam offers, malware**, and **misleading promotions**, which can cause financial loss and security breaches.
 
-🎯 Objectives
+This project focuses on building an **Indonesian-language email spam classifier** and comparing two different deep learning approaches.
 
-Build an email spam classifier for Indonesian text
+---
 
-Compare two modeling pipelines:
+## 🎯 Objectives
 
-TF-IDF + Convolutional Neural Network (CNN)
+- Build an email spam classifier for Indonesian text
+- Compare two modeling pipelines:
+  - **TF-IDF + Convolutional Neural Network (CNN)**
+  - **IndoBERT + Convolutional Neural Network (CNN)**
+- Evaluate model performance and analyze trade-offs between:
+  - Classical feature extraction
+  - Transformer-based embeddings
 
-IndoBERT + Convolutional Neural Network (CNN)
+---
 
-Evaluate model performance and analyze trade-offs between:
+## 🧠 System Architecture
 
-Classical feature extraction
+### Pipeline Overview
 
-Transformer-based embeddings
-
-🧠 System Architecture
-
-Pipeline Overview
-
+```text
 Raw Text
    ↓
 Case Folding → Filtering → Emoji Removal → Stopwords Removal → Stemming
    ↓
 Tokenization
    ↓
-EDA
+Exploratory Data Analysis (EDA)
    ↓
 Train-Test Split (80% / 20%)
    ↓
@@ -83,9 +83,7 @@ conda activate DL_Project
 ✅ STEP 2 — Install Dependencies (IMPORTANT ORDER)
 pip install -r requirements.txt
 
-
 📄 requirements.txt
-
 # ================================
 # CORE DEEP LEARNING
 # ================================
@@ -145,7 +143,7 @@ Close VS Code
 
 Reopen VS Code
 
-Select kernel: DL_Project
+Select kernel DL_Project
 
 🧪 STEP 5 — Environment Test (MANDATORY)
 import tensorflow as tf
@@ -155,7 +153,7 @@ print(tf.__version__)
 print("typing OK")
 
 
-If this runs successfully:
+Expected output:
 
 2.13.0
 typing OK
@@ -171,7 +169,7 @@ cd src
 python train.py
 
 
-📌 This will:
+This will:
 
 Train TF-IDF + CNN
 
