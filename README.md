@@ -214,8 +214,8 @@ Evaluation metrics include:
 
 ## 🧪 Optional Experiment — Embedding + CNN
 
-In addition to the main **TF-IDF + CNN** pipeline, this project includes an **optional experiment**
-exploring the difference between **TF-IDF + CNN** and **embedding-based representations + CNN**.
+In addition to the main **TF-IDF + CNN** pipeline, this project includes a **small optional experiment**
+using **text embeddings with a CNN classifier** for exploratory purposes.
 
 This experiment is **not part of the main system pipeline** and is intended only to provide
 additional insights into how embedding-based representations perform in comparison to
