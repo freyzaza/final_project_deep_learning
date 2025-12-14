@@ -74,19 +74,17 @@ deep-learning-final-project/
 
 ## 🚀 Getting Started
 
----
-
 ### 📦 Clone Repository
+---
 
 Clone the repository from GitHub:
 
 ```bash
 git clone https://github.com/freyzaza/final_project_deep_learning.git
-
-
-### 🔹 Prerequisites
 ```
 
+### 🔹 Prerequisites
+---
 Make sure you have the following installed:
 
 - **Python 3.10.9**
