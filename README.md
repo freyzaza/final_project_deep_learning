@@ -46,20 +46,4 @@ Evaluation
 
 ---
 
-## Project Structure
-
-```text
-deep-learning-final-project/
-├── app/                # Streamlit demo application
-├── data/               # Raw & processed datasets
-├── notebooks/          # EDA & experimentation notebooks
-├── src/                # Training, preprocessing & evaluation code
-├── config/             # Experiment configuration files
-├── outputs/            # Trained models & experiment results
-├── report/             # Final project report (PDF)
-├── presentation.pdf    # Project presentation slides
-├── requirements.txt    # Project dependencies
-├── README.md           # Main documentation
-├── .gitignore          # Ignored files & folders
-└── LICENSE             # MIT License
 
