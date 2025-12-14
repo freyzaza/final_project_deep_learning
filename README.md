@@ -61,14 +61,14 @@ deep-learning-final-project/
 ├── app/                # Streamlit demo application
 ├── data/               # Raw & processed datasets
 ├── notebooks/          # EDA & experimentation notebooks
-├── src/                # Training, preprocessing & evaluation code
 ├── config/             # Experiment configuration files
 ├── outputs/            # Trained models & experiment results
 ├── report/             # Final project report (PDF)
-├── requirements.txt    # Project dependencies
-├── README.md           # Main documentation
+├── src/                # Training, preprocessing & evaluation code
 ├── .gitignore          # Ignored files & folders
-└── LICENSE             # MIT License
+├── LICENSE             # MIT License
+├── README.md           # Main documentation
+└── requirements.txt    # Project dependencies
 ```
 ---
 
