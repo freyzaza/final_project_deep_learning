@@ -36,7 +36,7 @@ This project focuses on building a robust **Indonesian email spam classifier** u
 ```
 Raw Text
   ↓
-Case Folding → Filtering → Emoji Removal → Stopwords Removal → Stemming
+Case Folding → Filtering → Emoji Removal → Stopwords Removal
   ↓
 Tokenization
   ↓
