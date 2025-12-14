@@ -59,9 +59,9 @@ Evaluation
 ```text
 deep-learning-final-project/
 ├── app/                # Streamlit demo application
+├── config/             # Experiment configuration files
 ├── data/               # Raw & processed datasets
 ├── notebooks/          # EDA & experimentation notebooks
-├── config/             # Experiment configuration files
 ├── outputs/            # Trained models & experiment results
 ├── report/             # Final project report (PDF)
 ├── src/                # Training, preprocessing & evaluation code
@@ -112,10 +112,18 @@ conda create -n environment name (example: DL_Project) python=3.10.9
 ```
 pip install -r requirements.txt
 ```
+📌 **Notes:**
 
+- The `requirements.txt` file already includes **all dependencies** needed for:
+  - Data preprocessing
+  - Model training (**TF-IDF + CNN**, **IndoBERT + CNN**)
+  - Evaluation
+  - Streamlit application
+- **Do not install libraries manually** to avoid version conflicts.
+- Follow the installation order strictly as described in this guide.
 ### ✅ Step 3 — Register Kernel to VS Code
 
-Open terminal in VS Code (`Ctrl + ``):
+Open terminal in VS Code (Ctrl + `):
 ```
 python -m ipykernel install --user --name DL_Project --display-name "DL_Project"
 ```
