@@ -5,7 +5,12 @@ This folder contains datasets used for the Indonesian Email Spam Classification 
 ---
 
 ## 📁 Folder Structure
-
+data/
+├── raw/
+│   └── email_spam_raw.csv
+├── processed/
+│   └── email_spam_clean.csv
+└── README.md
 
 
 ---
