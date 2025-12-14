@@ -163,3 +163,26 @@ This process will:
 ```
 outputs/models/
 ```
+
+---
+## 🖥️ Run the Streamlit Application
+After the training process is completed, run the Streamlit application from the `app` directory:
+
+```
+# streamlit run app.py
+```
+Open the application in your browser:
+
+```
+http://localhost:8501 (example)
+
+```
+### 📌 Note
+
+- Streamlit does **NOT always open automatically**
+- The VS Code terminal will display a local URL
+- Use **Ctrl + Click** on the link, or copy it into your browser
+---
+
+
+
