@@ -10,7 +10,6 @@ import pandas as pd
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LOG_DIR = os.path.join(BASE_DIR, "outputs", "logs")
-PLOT_DIR = os.path.join(BASE_DIR, "outputs", "plots")
 
 def ensure_dir(path):
     if not os.path.exists(path):
@@ -55,7 +54,7 @@ def plot_confusion_heatmap(y_true, y_pred, labels, title, model_name, save_path=
 # Training Curves → disimpan ke outputs/plots/
 # ============================================================
 def plot_training_curves(history, model_name):
-    ensure_dir(PLOT_DIR)
+    ensure_dir(LOG_DIR)
 
     # Accuracy
     plt.figure(figsize=(7, 5))
@@ -120,7 +119,6 @@ def evaluate_model(model_name, y_true, y_pred, labels):
 # ============================================================
 def full_evaluation(model_name, history, y_true, y_pred, labels):
     ensure_dir(LOG_DIR)
-    ensure_dir(PLOT_DIR)
 
     # Save training curves
     plot_training_curves(history, model_name)
@@ -130,3 +128,66 @@ def full_evaluation(model_name, history, y_true, y_pred, labels):
 
     print(f"\n==== Evaluation for {model_name} DONE ====\n")
     return acc, report
+
+
+# ============================================================
+# Side-by-Side Comparison (Loss & Accuracy)
+# ============================================================
+def plot_side_by_side(history_tfidf, history_bert):
+    ensure_dir(LOG_DIR)
+
+    # -------------------- LOSS COMPARISON --------------------
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+    # TF-IDF Loss
+    axes[0].plot(history_tfidf.history["loss"], label="Train Loss", color="red")
+    axes[0].plot(history_tfidf.history["val_loss"], label="Val Loss", color="darkred")
+    axes[0].set_title("TF-IDF + CNN Loss Curve")
+    axes[0].set_xlabel("Epoch")
+    axes[0].set_ylabel("Loss")
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # IndoBERT Loss
+    axes[1].plot(history_bert.history["loss"], label="Train Loss", color="blue")
+    axes[1].plot(history_bert.history["val_loss"], label="Val Loss", color="navy")
+    axes[1].set_title("IndoBERT + CNN Loss Curve")
+    axes[1].set_xlabel("Epoch")
+    axes[1].set_ylabel("Loss")
+    axes[1].legend()
+    axes[1].grid(True)
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(LOG_DIR, "tfidf_indobert_loss.png"),
+                dpi=300, bbox_inches="tight")
+    plt.close()
+
+    print("[SAVED] → outputs/logs/tfidf_indobert_loss.png")
+
+    # ------------------ ACCURACY COMPARISON ------------------
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+    # TF-IDF Accuracy
+    axes[0].plot(history_tfidf.history["accuracy"], label="Train Accuracy", color="red")
+    axes[0].plot(history_tfidf.history["val_accuracy"], label="Val Accuracy", color="darkred")
+    axes[0].set_title("TF-IDF + CNN Accuracy Curve")
+    axes[0].set_xlabel("Epoch")
+    axes[0].set_ylabel("Accuracy")
+    axes[0].legend()
+    axes[0].grid(True)
+
+    # IndoBERT Accuracy
+    axes[1].plot(history_bert.history["accuracy"], label="Train Accuracy", color="blue")
+    axes[1].plot(history_bert.history["val_accuracy"], label="Val Accuracy", color="navy")
+    axes[1].set_title("IndoBERT + CNN Accuracy Curve")
+    axes[1].set_xlabel("Epoch")
+    axes[1].set_ylabel("Accuracy")
+    axes[1].legend()
+    axes[1].grid(True)
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(LOG_DIR, "tfidf_indobert_accuracy.png"),
+                dpi=300, bbox_inches="tight")
+    plt.close()
+
+    print("[SAVED] → outputs/logs/tfidf_indobert_accuracy.png")

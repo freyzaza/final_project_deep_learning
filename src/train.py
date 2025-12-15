@@ -7,7 +7,7 @@ from preprocess import save_cleaned_dataset
 from data_loader import load_data, split_data
 from model_tfidf import build_tfidf_vectorizer, transform_tfidf, build_tfidf_cnn
 from model_bert import encode_bert, build_bert_cnn
-from evaluate import evaluate_model
+from evaluate import evaluate_model, plot_side_by_side
 
 import numpy as np
 import os
@@ -133,3 +133,5 @@ pred_bert = model_bert.predict([
 ]).argmax(axis=1)
 
 evaluate_model("IndoBERT + CNN", y_test, pred_bert, labels)
+
+plot_side_by_side(history_tfidf, history_bert)
