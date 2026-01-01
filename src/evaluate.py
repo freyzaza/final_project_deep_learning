@@ -85,7 +85,7 @@ def plot_training_curves(history, model_name):
 
 
 # ============================================================
-# Evaluate model → plots (report + heatmap)
+# Evaluate model → logs & plots  (report + heatmap)
 # ============================================================
 def evaluate_model(model_name, y_true, y_pred, labels):
     ensure_dir(PLOT_DIR)
