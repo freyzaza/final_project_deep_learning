@@ -64,7 +64,7 @@ deep-learning-final-project/
 ├── notebooks/          # EDA & experimentation notebooks
 ├── outputs/            # Trained models & experiment results
 ├── report/             # Final project report (PDF)
-├── src/                # Training, preprocessing & evaluation code
+├── src/                # Training, preprocessing & evaluation code. Untuk utils.py, kami memakai nama preprocess.py
 ├── .gitignore          # Ignored files & folders
 ├── LICENSE             # MIT License
 ├── README.md           # Main documentation
