@@ -9,6 +9,7 @@ import pandas as pd
 # ============================================================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PLOT_DIR = os.path.join(BASE_DIR, "outputs", "plots")
 LOG_DIR = os.path.join(BASE_DIR, "outputs", "logs")
 
 def ensure_dir(path):
@@ -54,7 +55,7 @@ def plot_confusion_heatmap(y_true, y_pred, labels, title, model_name, save_path=
 # Training Curves → disimpan ke outputs/plots/
 # ============================================================
 def plot_training_curves(history, model_name):
-    ensure_dir(LOG_DIR)
+    ensure_dir(PLOT_DIR)
 
     # Accuracy
     plt.figure(figsize=(7, 5))
@@ -84,9 +85,10 @@ def plot_training_curves(history, model_name):
 
 
 # ============================================================
-# Evaluate model → logs (report + heatmap)
+# Evaluate model → plots (report + heatmap)
 # ============================================================
 def evaluate_model(model_name, y_true, y_pred, labels):
+    ensure_dir(PLOT_DIR)
     ensure_dir(LOG_DIR)
 
     # Accuracy
@@ -102,7 +104,7 @@ def evaluate_model(model_name, y_true, y_pred, labels):
     print(f"[SAVED] Classification Report → {report_path}")
 
     # Heatmap
-    heatmap_path = os.path.join(LOG_DIR, f"{model_name}_heatmap.png")
+    heatmap_path = os.path.join(PLOT_DIR, f"{model_name}_heatmap.png")
     plot_confusion_heatmap(
         y_true, y_pred, labels,
         title=f"Confusion Matrix - {model_name}",
@@ -118,12 +120,12 @@ def evaluate_model(model_name, y_true, y_pred, labels):
 # Combined evaluation function
 # ============================================================
 def full_evaluation(model_name, history, y_true, y_pred, labels):
-    ensure_dir(LOG_DIR)
+    ensure_dir(PLOT_DIR)
 
     # Save training curves
     plot_training_curves(history, model_name)
 
-    # Save logs (classification report + heatmap)
+    # Save plots (classification report + heatmap)
     acc, report = evaluate_model(model_name, y_true, y_pred, labels)
 
     print(f"\n==== Evaluation for {model_name} DONE ====\n")
@@ -134,7 +136,7 @@ def full_evaluation(model_name, history, y_true, y_pred, labels):
 # Side-by-Side Comparison (Loss & Accuracy)
 # ============================================================
 def plot_side_by_side(history_tfidf, history_bert):
-    ensure_dir(LOG_DIR)
+    ensure_dir(PLOT_DIR)
 
     # -------------------- LOSS COMPARISON --------------------
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
@@ -158,11 +160,11 @@ def plot_side_by_side(history_tfidf, history_bert):
     axes[1].grid(True)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(LOG_DIR, "tfidf_indobert_loss.png"),
+    plt.savefig(os.path.join(PLOT_DIR, "tfidf_indobert_loss.png"),
                 dpi=300, bbox_inches="tight")
     plt.close()
 
-    print("[SAVED] → outputs/logs/tfidf_indobert_loss.png")
+    print("[SAVED] → outputs/plots/tfidf_indobert_loss.png")
 
     # ------------------ ACCURACY COMPARISON ------------------
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
@@ -186,8 +188,8 @@ def plot_side_by_side(history_tfidf, history_bert):
     axes[1].grid(True)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(LOG_DIR, "tfidf_indobert_accuracy.png"),
+    plt.savefig(os.path.join(PLOT_DIR, "tfidf_indobert_accuracy.png"),
                 dpi=300, bbox_inches="tight")
     plt.close()
 
-    print("[SAVED] → outputs/logs/tfidf_indobert_accuracy.png")
+    print("[SAVED] → outputs/plots/tfidf_indobert_accuracy.png")
