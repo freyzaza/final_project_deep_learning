@@ -81,6 +81,14 @@ Clone the repository from GitHub:
 ```
 git clone https://github.com/freyzaza/final_project_deep_learning.git
 ```
+### Jalankan Training (Wajib)
+
+Setelah proses clone selesai, **jalankan kembali file `train.py`** untuk melatih model dan menghasilkan seluruh artefak yang dibutuhkan, termasuk model, tokenizer, vectorizer, dan label encoder.
+
+```
+python train.py
+```
+
 
 ###  System Requirements
 
