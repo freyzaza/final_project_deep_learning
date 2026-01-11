@@ -97,7 +97,7 @@ git clone https://github.com/freyzaza/final_project_deep_learning.git
 After cloning the repository, **run `train.py`** to train the model and generate all required artifacts, including the model, tokenizer, vectorizer, and label encoder.
 
 ```
-python train.py
+python src/train.py
 ```
 
 
