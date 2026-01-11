@@ -4,6 +4,17 @@ This folder contains datasets used for the Indonesian Email Spam Classification 
 
 ---
 
+## Dataset
+
+This project uses the **Indonesian Email Spam** dataset from Kaggle.
+
+📥 Download the dataset here:  
+https://www.kaggle.com/datasets/gevabriel/indonesian-email-spam/data
+
+The dataset contains 2,620 emails labeled as spam and non-spam (ham). It is suitable for training and evaluating text classification models for Indonesian email spam detection.
+
+---
+
 ## 📁 Folder Structure
 ```
 data/
